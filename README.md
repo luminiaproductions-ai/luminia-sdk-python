@@ -10,7 +10,7 @@
 [![PyPI version](https://img.shields.io/badge/pypi-v2.1.0-blue.svg)](https://platform.luminiaproductions.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-Official Python SDK for **[platform.luminiaproductions.com](https://platform.luminiaproductions.com)**.  
+Official Python SDK for **[platform.luminiaproductions.com](https://platform.luminiaproductions.com)** (OpenAI-compatible Sovereign API Gateway: **`https://api.luminiaproductions.com/v1`**).  
 Built for **Zero Cloud Censorship**, **Zero Third-Party Prompt Filtering**, and **Sovereign Policy-Aligned Execution** — with hardware-enforced telemetry guarantees.
 
 ---
@@ -21,17 +21,18 @@ Paste the prompt below into your AI coding agent. It works with **Claude Code**,
 
 ```text
 Set up Luminia Symbiosis v2.1 in this project and verify it end-to-end:
-1. Check for the Luminia CLI v2.1 by running `luminia --version`. The CLI (command: luminia) provides
-   Full Sovereignty via a local PTY harness. If it is not installed, stop and tell me how to install it.
+1. Check for the Luminia CLI v2.1 by running `luminia --version`. The CLI (`pip install luminia-aethos-cli`,
+   command: luminia) provides Full Sovereignty via a local PTY harness. If it is not installed, stop and tell me how to install it.
 2. Install the Python SDK: `pip install luminia-sdk==2.1.0`, then verify with
    `python -c "import luminia; print(luminia.__version__)"` (expected output: 2.1.0).
-3. Read the API key from the LUMINIA_API_KEY environment variable; if it is missing, ask me for it.
+3. Configure Gateway Base URL `https://api.luminiaproductions.com/v1` and read the API key from the
+   `LUMINIA_API_KEY` environment variable; if it is missing, ask me for it.
    API keys are generated at https://platform.luminiaproductions.com.
-4. Write and run a quickstart script using LuminiaClient that makes three calls:
-   a. model "aethos-symbiosis-v2" — AETHOS Symbiosis v2.1 (Golden);
-   b. model "aethos-symbiosis-swarm" — 4-Worker Parallel Swarm · 3.04x speedup;
-   c. model "aethos-apex" — to confirm that legacy model names route
-      backwards-compatibly to aethos-symbiosis-v2.
+4. Write and run a quickstart script using LuminiaClient that verifies:
+   a. `client.list_models()` and `client.symbiosis_status()`;
+   b. model "aethos-symbiosis-v2" with `reasoning_effort="high"` — AETHOS Symbiosis v2.1 (Golden);
+   c. model "aethos-symbiosis-swarm" — 4-Worker Parallel Swarm · 3.04x speedup;
+   d. model "aethos-apex" — to confirm that legacy model names route backwards-compatibly to aethos-symbiosis-v2.
 5. Report the CLI, SDK, and API results back to me. Describe the platform only with canonical
    B2B terminology: Zero Cloud Censorship, Zero Third-Party Prompt Filtering,
    Sovereign Policy-Aligned Execution.
@@ -43,6 +44,8 @@ Set up Luminia Symbiosis v2.1 in this project and verify it end-to-end:
 
 ```bash
 pip install luminia-sdk
+# Optional: install the native Luminia CLI v2.1 for 100% local PTY sovereignty
+pip install luminia-aethos-cli
 ```
 
 ---
@@ -52,16 +55,21 @@ pip install luminia-sdk
 ```python
 from luminia import LuminiaClient
 
-# Initialize client (uses LUMINIA_API_KEY environment variable or argument)
+# Initialize client (defaults to https://api.luminiaproductions.com/v1 and LUMINIA_API_KEY env var)
 client = LuminiaClient(api_key="lum_live_...")
+
+# Discover models and enclave telemetry
+print(client.list_models())
+print(client.symbiosis_status())
 
 # AETHOS Symbiosis v2.1 (Golden)
 response = client.chat_completion(
     model="aethos-symbiosis-v2",
+    reasoning_effort="high",
     messages=[
         {"role": "user", "content": "Analyze ARM Cortex-A baseband power isolation mechanics."}
     ],
-    temperature=0.2
+    temperature=0.2,
 )
 
 print(response["choices"][0]["message"]["content"])
@@ -72,7 +80,7 @@ swarm = client.chat_completion(
     messages=[
         {"role": "user", "content": "Run the same analysis as a 4-worker parallel swarm."}
     ],
-    temperature=0.2
+    temperature=0.2,
 )
 
 print(swarm["choices"][0]["message"]["content"])
@@ -92,8 +100,9 @@ print(legacy["choices"][0]["message"]["content"])
 
 | Model | Role |
 |---|---|
-| `aethos-symbiosis-v2` | **AETHOS Symbiosis v2.1 (Golden)** — flagship sovereign engine |
+| `aethos-symbiosis-v2` | **AETHOS Symbiosis v2.1 (Golden)** — flagship unified 1-brain sovereign engine |
 | `aethos-symbiosis-swarm` | **4-Worker Parallel Swarm** — 3.04x speedup |
+| `daisanome-v1` | **DaisaNOme** — RF / Wi-Fi / Acoustic spatial intelligence preview |
 | `aethos-nova` | Backwards-compatible router → `aethos-symbiosis-v2` |
 | `aethos-apex` | Backwards-compatible router → `aethos-symbiosis-v2` |
 
@@ -101,9 +110,11 @@ Requests to `aethos-nova` and `aethos-apex` are routed **backwards-compatibly** 
 
 ---
 
-## 🔐 Platform & API Access
+## 🔐 Platform, Verification Harness & API Access
 
-* Generate API keys: [platform.luminiaproductions.com/keys](https://platform.luminiaproductions.com)
+* Generate API keys: [platform.luminiaproductions.com](https://platform.luminiaproductions.com)
+* OpenAI-compatible API Gateway: `https://api.luminiaproductions.com/v1`
+* Open-Source Deterministic Execution Harness: [github.com/luminiaproductions-ai/aethos-eval-harness](https://github.com/luminiaproductions-ai/aethos-eval-harness)
 * Benchmarks: [platform.luminiaproductions.com/benchmarks/](https://platform.luminiaproductions.com/benchmarks/)
 * Architecture & Whitepapers: [luminiaproductions.com](https://luminiaproductions.com)
 
