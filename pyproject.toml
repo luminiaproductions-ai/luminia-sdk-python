@@ -6,12 +6,16 @@ build-backend = "setuptools.build_meta"
 name = "luminia-sdk"
 version = "2.1.0"
 authors = [{ name = "Luminia Sovereign Systems", email = "dev@luminiaproductions.com" }]
-description = "Official Python SDK for Luminia Sovereign Intelligence Platform"
+description = "Official Python SDK & Sovereign Terminal CLI (luminia v2.1) for Luminia Sovereign Intelligence Platform"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "requests>=2.28.0",
 ]
+
+[project.scripts]
+luminia = "luminia.cli:main"
+luminia-aethos = "luminia.cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

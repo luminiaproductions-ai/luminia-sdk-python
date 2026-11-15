@@ -1,68 +1,72 @@
-# Luminia Python SDK (`luminia-sdk`)
+# Luminia Python SDK & Sovereign Terminal CLI (`luminia-sdk` v2.1)
 
 ```text
-// FULL SOVEREIGNTY · LOCAL PTY HARNESS — Use the Luminia CLI v2.1 (luminia) for Full Sovereignty
+// FULL SOVEREIGNTY · LOCAL PTY HARNESS — Includes Luminia CLI v2.1 (`luminia`) & Python SDK (`LuminiaClient`)
 ```
 
 > **Outside-Customer Terminal CLI live benchmark — 5/5 · 100% PASS.**
 > Luminia CLI v2.1 (`luminia`) ran the full live benchmark suite in an outside-customer terminal over a local PTY harness: **5/5 tests, 100% PASS**.
 
-[![PyPI version](https://img.shields.io/badge/pypi-v2.1.0-blue.svg)](https://platform.luminiaproductions.com)
+[![Version](https://img.shields.io/badge/version-v2.1.0-blue.svg)](https://platform.luminiaproductions.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-Official Python SDK for **[platform.luminiaproductions.com](https://platform.luminiaproductions.com)** (OpenAI-compatible Sovereign API Gateway: **`https://api.luminiaproductions.com/v1`**).  
-Built for **Zero Cloud Censorship**, **Zero Third-Party Prompt Filtering**, and **Sovereign Policy-Aligned Execution** — with hardware-enforced telemetry guarantees.
+Official Python SDK & Sovereign Terminal CLI (`luminia`) for **[platform.luminiaproductions.com](https://platform.luminiaproductions.com)** (OpenAI-compatible Sovereign API Gateway: **`https://api.luminiaproductions.com/v1`**).  
+Built for **Zero Cloud Censorship**, **Zero Third-Party Prompt Filtering**, and **Sovereign Policy-Aligned Execution** — with deterministic compiler & ASAN verification guarantees.
+
+---
+
+## ⚡ 1-Command Installation (SDK + `luminia` Terminal CLI)
+
+```bash
+pip install git+https://github.com/luminiaproductions-ai/luminia-sdk-python.git
+```
+
+Verify immediately in your terminal (works out of the box in Sovereign Preview mode, or with `LUMINIA_API_KEY`):
+
+```bash
+luminia --version
+luminia status
+luminia "Verify stack canary protection in C11 with GCC"
+luminia --swarm "Audit TLS 1.3 cipher suite downgrade surface"
+```
 
 ---
 
 ## 🤖 Let Your AI Agent Set Up Luminia Symbiosis v2.1 (Copy-Paste Onboarding Prompt)
 
-Paste the prompt below into your AI coding agent. It works with **Claude Code**, **Antigravity CLI**, **OpenCode**, **Codex**, and **Cursor**.
+Paste the prompt below into your AI coding agent (**Claude Code**, **Antigravity CLI**, **OpenCode**, **Codex**, or **Cursor**):
 
 ```text
 Set up Luminia Symbiosis v2.1 in this project and verify it end-to-end:
-1. Check for the Luminia CLI v2.1 by running `luminia --version`. The CLI (`pip install luminia-aethos-cli`,
-   command: luminia) provides Full Sovereignty via a local PTY harness. If it is not installed, stop and tell me how to install it.
-2. Install the Python SDK: `pip install luminia-sdk==2.1.0`, then verify with
-   `python -c "import luminia; print(luminia.__version__)"` (expected output: 2.1.0).
-3. Configure Gateway Base URL `https://api.luminiaproductions.com/v1` and read the API key from the
-   `LUMINIA_API_KEY` environment variable; if it is missing, ask me for it.
-   API keys are generated at https://platform.luminiaproductions.com.
-4. Write and run a quickstart script using LuminiaClient that verifies:
+1. Install the official Luminia SDK & Terminal CLI v2.1 directly from GitHub:
+   `pip install git+https://github.com/luminiaproductions-ai/luminia-sdk-python.git`
+2. Verify the CLI and SDK installation:
+   `luminia --version`
+   `python3 -c "import luminia; print(luminia.__version__)"` (expected output: 2.1.0)
+3. Configure Gateway Base URL `https://api.luminiaproductions.com/v1` (reads `LUMINIA_API_KEY` if set, or uses Sovereign Preview mode automatically).
+4. Run a verification check using `LuminiaClient`:
    a. `client.list_models()` and `client.symbiosis_status()`;
-   b. model "aethos-symbiosis-v2" with `reasoning_effort="high"` — AETHOS Symbiosis v2.1 (Golden);
-   c. model "aethos-symbiosis-swarm" — 4-Worker Parallel Swarm · 3.04x speedup;
-   d. model "aethos-apex" — to confirm that legacy model names route backwards-compatibly to aethos-symbiosis-v2.
-5. Report the CLI, SDK, and API results back to me. Describe the platform only with canonical
-   B2B terminology: Zero Cloud Censorship, Zero Third-Party Prompt Filtering,
-   Sovereign Policy-Aligned Execution.
+   b. model `"aethos-symbiosis-v2"` with `reasoning_effort="high"` — AETHOS Symbiosis v2.1 (Golden);
+   c. model `"aethos-symbiosis-v2"` with `swarm=True` — Built-in 4-Worker Parallel `/swarm` Mode (3.04x speedup).
+5. Report the CLI, SDK, and API results back to me using canonical B2B terminology:
+   Zero Cloud Censorship, Zero Third-Party Prompt Filtering, Sovereign Policy-Aligned Execution.
 ```
 
 ---
 
-## ⚡ Installation
-
-```bash
-pip install luminia-sdk
-# Optional: install the native Luminia CLI v2.1 for 100% local PTY sovereignty
-pip install luminia-aethos-cli
-```
-
----
-
-## 🚀 Quick Usage
+## 🚀 Quick Python SDK Usage
 
 ```python
 from luminia import LuminiaClient
 
-# Initialize client (defaults to https://api.luminiaproductions.com/v1 and LUMINIA_API_KEY env var)
-client = LuminiaClient(api_key="lum_live_...")
+# Initialize client (uses LUMINIA_API_KEY if set, or Sovereign Preview mode out of the box)
+client = LuminiaClient()
 
-# Discover models and enclave telemetry
+# Discover model catalog and live enclave telemetry
 print(client.list_models())
 print(client.symbiosis_status())
 
-# AETHOS Symbiosis v2.1 (Golden)
+# AETHOS Symbiosis v2.1 (Golden) — Single Flagship Sovereign Model
 response = client.chat_completion(
     model="aethos-symbiosis-v2",
     reasoning_effort="high",
@@ -71,51 +75,39 @@ response = client.chat_completion(
     ],
     temperature=0.2,
 )
-
 print(response["choices"][0]["message"]["content"])
 
-# 4-Worker Parallel Swarm · 3.04x speedup
+# Built-in 4-Worker Parallel /swarm Mode on the same aethos-symbiosis-v2 model (3.04x speedup)
 swarm = client.chat_completion(
-    model="aethos-symbiosis-swarm",
+    model="aethos-symbiosis-v2",
+    swarm=True,
     messages=[
-        {"role": "user", "content": "Run the same analysis as a 4-worker parallel swarm."}
+        {"role": "user", "content": "Run a 4-worker parallel security audit on this module."}
     ],
     temperature=0.2,
 )
-
 print(swarm["choices"][0]["message"]["content"])
-
-# aethos-nova and aethos-apex route backwards-compatibly to aethos-symbiosis-v2
-legacy = client.chat_completion(
-    model="aethos-apex",
-    messages=[{"role": "user", "content": "Backwards-compatible routing check."}],
-)
-
-print(legacy["choices"][0]["message"]["content"])
 ```
 
 ---
 
-## 🧠 Models
+## 🧠 Flagship Model Architecture
 
-| Model | Role |
+| Model ID | Description |
 |---|---|
-| `aethos-symbiosis-v2` | **AETHOS Symbiosis v2.1 (Golden)** — flagship unified 1-brain sovereign engine |
-| `aethos-symbiosis-swarm` | **4-Worker Parallel Swarm** — 3.04x speedup |
-| `daisanome-v1` | **DaisaNOme** — RF / Wi-Fi / Acoustic spatial intelligence preview |
-| `aethos-nova` | Backwards-compatible router → `aethos-symbiosis-v2` |
-| `aethos-apex` | Backwards-compatible router → `aethos-symbiosis-v2` |
+| `aethos-symbiosis-v2` | **AETHOS Symbiosis v2.1 (Golden)** — Flagship Sovereign Security, Systems Engineering & Compiler-Verified Code Synthesis Engine (includes built-in 4-Worker Parallel `/swarm` Execution Mode) |
+| `daisanome-v1` | **DaisaNOme** — RF / Wi-Fi / Acoustic spatial intelligence (Closed Enclave Preview) |
 
-Requests to `aethos-nova` and `aethos-apex` are routed **backwards-compatibly** to `aethos-symbiosis-v2`, so existing integrations keep working unchanged.
+> Legacy model identifiers (`aethos-nova`, `aethos-apex`) route backwards-compatibly to `aethos-symbiosis-v2`.
 
 ---
 
 ## 🔐 Platform, Verification Harness & API Access
 
-* Generate API keys: [platform.luminiaproductions.com](https://platform.luminiaproductions.com)
+* Live Console & API Keys: [platform.luminiaproductions.com](https://platform.luminiaproductions.com)
 * OpenAI-compatible API Gateway: `https://api.luminiaproductions.com/v1`
 * Open-Source Deterministic Execution Harness: [github.com/luminiaproductions-ai/aethos-eval-harness](https://github.com/luminiaproductions-ai/aethos-eval-harness)
-* Benchmarks: [platform.luminiaproductions.com/benchmarks/](https://platform.luminiaproductions.com/benchmarks/)
+* Benchmarks: [luminiaproductions.com/benchmarks/](https://luminiaproductions.com/benchmarks/)
 * Architecture & Whitepapers: [luminiaproductions.com](https://luminiaproductions.com)
 
 ---
