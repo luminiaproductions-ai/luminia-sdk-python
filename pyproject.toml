@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "luminia-sdk"
-version = "1.0.0"
+version = "2.1.0"
 authors = [{ name = "Luminia Sovereign Systems", email = "dev@luminiaproductions.com" }]
 description = "Official Python SDK for Luminia Sovereign Intelligence Platform"
 readme = "README.md"

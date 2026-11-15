@@ -14,17 +14,23 @@ class LuminiaClient:
         self.session.headers.update({
             "Authorization": f"Bearer {self.api_key}" if self.api_key else "",
             "Content-Type": "application/json",
-            "User-Agent": "luminia-python-sdk/1.0.0",
+            "User-Agent": "luminia-python-sdk/2.1.0",
         })
 
     def chat_completion(
         self,
         messages: list,
-        model: str = "aethos-sovereign-v1",
+        model: str = "aethos-symbiosis-v2",
         temperature: float = 0.2,
         stream: bool = False,
     ) -> Dict[str, Any]:
-        """Send a completion request to the Sovereign AETHOS engine."""
+        """Send a completion request to the AETHOS engine.
+
+        Default model is "aethos-symbiosis-v2" (AETHOS Symbiosis v2.1 Golden).
+        "aethos-symbiosis-swarm" runs the 4-Worker Parallel Swarm (3.04x speedup).
+        "aethos-nova" and "aethos-apex" route backwards-compatibly to
+        "aethos-symbiosis-v2".
+        """
         url = f"{self.base_url}/chat/completions"
         payload = {
             "model": model,
